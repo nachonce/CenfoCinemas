@@ -11,5 +11,12 @@ namespace DataAccess.DAO
         public string ProcedureName { get; set; }
         public List<String> Parameters  { get; set; }
 
+        public void ExecuteProcedure(SqlOperation sqlOperation)
+
+        {
+            using (var command = new SqlCommand(sqlOperation.ProcedureName, conn)
+            { }
+        }
+
     }
 }
