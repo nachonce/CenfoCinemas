@@ -17,6 +17,17 @@ public class program {
         var sqlDao = SqlDao.GetInstance();
         sqlDao.ExecuteProcedure(sqlOperation);
 
+        var movieOperation = new SqlOperation();
+        movieOperation.ProcedureName = "CRE_MOVIE_PR";
+
+        movieOperation.AddStringParameter("P_Title", "Titanic");
+        movieOperation.AddStringParameter("P_Description", "El barco se hunde");
+        movieOperation.AddDateTimeParam("P_ReleaseDate", DateTime.Now);
+        movieOperation.AddStringParameter("P_Genre", "Drama");
+        movieOperation.AddStringParameter("P_Director", "Juan Lopez");
+
+        sqlDao.ExecuteProcedure(movieOperation);
+
     }
 
 }
