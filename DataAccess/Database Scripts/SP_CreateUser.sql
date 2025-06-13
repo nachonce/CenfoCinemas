@@ -13,7 +13,7 @@ CREATE PROCEDURE CRE_USER_PR
 )
 AS
 BEGIN
-    INSERT INTO TBL_User(Created, UserCode, Name, Email, Password, BirthDate, Status)
+    INSERT INTO TBL_User(Created, UserCode, Name, Email, Password,Status, BirthDate)
 	VALUES(GETDATE(), @P_UserCode, @P_Name, @P_Email, @P_Password, @P_BirthDate, @P_Status);
 END
 GO

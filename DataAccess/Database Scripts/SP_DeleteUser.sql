@@ -1,0 +1,9 @@
+﻿CREATE PROCEDURE DEL_USER_PR
+
+@P_UserCode nvarchar(30)
+
+AS 
+BEGIN
+	DELETE FROM TBL_User
+	WHERE UserCode = @P_UserCode
+END

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DTOs
 {
-    internal class BaseDTO
+    public class BaseDTO
     {
         public int Id { get; set; }
         public DateTime Created { get; set; }
