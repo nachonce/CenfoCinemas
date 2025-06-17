@@ -26,6 +26,7 @@ public class EmailSender
 
         var response = await client.SendEmailAsync(msg);
 
+
         Console.WriteLine("Status: " + response.StatusCode);
 
 
