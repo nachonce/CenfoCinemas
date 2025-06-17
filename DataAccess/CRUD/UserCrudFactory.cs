@@ -37,11 +37,11 @@ namespace DataAccess.CRUD
             throw new NotImplementedException();
         }
 
-        public override T RetrieveById<T>(string userCode)
+        public override T RetrieveById<T>(int id)
         {
             var op = new SqlOperation();
             op.ProcedureName = "RET_USER_BY_ID_PR";
-            op.AddStringParameter("P_UserCode", userCode);
+            op.AddIntParam("P_Ide", id);
 
             var result = _sqlDao.ExecuteQueryProcedure(op);
 
@@ -49,12 +49,54 @@ namespace DataAccess.CRUD
             {
                 var row = result[0];
                 var user = BuildUser(row);
-                return (T)(object)user;
+                return (T)Convert.ChangeType(user, typeof(T));
             }
 
             return default(T); // o throw new Exception("Usuario no encontrado");
         }
 
+        public T RetrieveByUerCode<T>(User user)
+        {
+                var sqlOperation = new SqlOperation();
+            sqlOperation.ProcedureName = "RET_USER_BY_CODE_PR";
+            sqlOperation.AddStringParameter("P_UserCode", user.UserCode);
+
+            var lstResults = _sqlDao.ExecuteQueryProcedure(sqlOperation);
+
+
+            if (lstResults.Count > 0) {
+                var row = lstResults[0];
+                user = BuildUser(row);
+
+                return (T)Convert.ChangeType(user, typeof(T));
+
+                    
+            
+            }
+            return default(T);
+        }
+
+        public T RetrieveByEmail<T>(User user)
+        {
+            var sqlOperation = new SqlOperation();
+            sqlOperation.ProcedureName = "RET_USER_BY_EMAIL_PR";
+            sqlOperation.AddStringParameter("P_Email", user.Email);
+
+            var lstResults = _sqlDao.ExecuteQueryProcedure(sqlOperation);
+
+
+            if (lstResults.Count > 0)
+            {
+                var row = lstResults[0];
+                user = BuildUser(row);
+
+                return (T)Convert.ChangeType(user, typeof(T));
+
+
+
+            }
+            return default(T);
+        }
 
         public override List<T> RetrieveAll<T>()
         {
@@ -108,6 +150,25 @@ namespace DataAccess.CRUD
         public override T Retrieve<T>()
         {
             throw new NotImplementedException();
+        }
+
+
+        public List<string> GetAllEmails() { 
+        
+            var emails =new List<string>();
+            var sqlOpearation = new SqlOperation();
+            sqlOpearation.ProcedureName = "RET_ALL_EMAILS_PR";
+
+
+            var result = _sqlDao.ExecuteQueryProcedure(sqlOpearation);
+
+            foreach (var row in result) {
+
+                emails.Add((string)row["Email"]);
+
+            }
+            return emails;
+        
         }
     }
 }

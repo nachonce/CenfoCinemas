@@ -1,5 +1,5 @@
 ﻿CREATE PROCEDURE RET_USER_BY_ID_PR
-    @P_UserCode VARCHAR(30)
+    @P_Id INT
 AS
 BEGIN
     SELECT Id,
@@ -12,6 +12,6 @@ BEGIN
            BirthDate,
            Status
     FROM TBL_User
-    WHERE UserCode = @P_UserCode;
+    WHERE Id = @P_Id;
 END
 GO

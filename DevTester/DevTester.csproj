@@ -9,11 +9,15 @@
 
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="SendGrid" Version="9.29.3" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\DataAccess\DataAccess.csproj" />
     <ProjectReference Include="..\DTOs\DTOs.csproj" />
+    <ProjectReference Include="..\ExceptionManager\ExceptionManager.csproj" />
+	  <ProjectReference Include="..\CoreApp\CoreApp.csproj" />
+
   </ItemGroup>
 
 </Project>

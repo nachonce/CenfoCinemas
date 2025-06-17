@@ -2,6 +2,8 @@
 using DataAccess.DAOs;
 using DTOs;
 using Newtonsoft.Json;
+using CoreApp;
+
 using System;
 using System.Text.Json.Serialization;
 
@@ -110,8 +112,9 @@ public class program {
                
 
             };
-            var uCrud = new MovieCrudFactory();
-            uCrud.Create(movie);
+
+            var um = new MovieManager();
+            um.Create(movie);
 
             Console.WriteLine("Película agregada con éxito.");
 
@@ -123,6 +126,12 @@ public class program {
         {
             Console.Write("Código de usuario: ");
             string userCode = Console.ReadLine();
+
+            if (string.IsNullOrWhiteSpace(userCode))
+            {
+                Console.WriteLine("El código de usuario no puede estar vacío.");
+                return;
+            }
 
             Console.Write("Nombre: ");
             string name = Console.ReadLine();
@@ -150,8 +159,9 @@ public class program {
                     BirthDate = birthDate
 
                 };
-                var uCrud = new UserCrudFactory();
-                uCrud.Create(user);
+
+                  var um = new UserManager();
+                 um.Create(user);
 
             Console.WriteLine(" Usuario agregado con éxito.");
         }
@@ -227,10 +237,10 @@ public class program {
         static void ConsultarUsuarioPorCodigo()
         {
             Console.Write("Digite el código del usuario: ");
-            string userCode = Console.ReadLine();
+            int  code = Console.Read();
 
             var uCrud = new UserCrudFactory();
-            var user = uCrud.RetrieveById<User>(userCode);
+            var user = uCrud.RetrieveById<User>(code);
 
             if (user != null)
             {
@@ -246,7 +256,7 @@ public class program {
         static void ConsultarPeliculaPorId()
         {
             Console.Write("Digite el ID de la película: ");
-            string idStr = Console.ReadLine();
+            int  idStr = Console.Read();
 
             var mCrud = new MovieCrudFactory();
             var movie = mCrud.RetrieveById<Movie>(idStr);

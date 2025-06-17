@@ -65,10 +65,9 @@ namespace DataAccess.CRUD
             return lstMovies;
         }
 
-        public override T RetrieveById<T>(string code)
+        public override T RetrieveById<T>(int   id)
         {
-            if (!int.TryParse(code, out int id))
-                throw new ArgumentException("El parámetro debe ser un número válido para buscar por Id.");
+            
 
             var op = new SqlOperation();
             op.ProcedureName = "RET_MOVIE_BY_ID_PR";
@@ -86,7 +85,7 @@ namespace DataAccess.CRUD
             return default(T);
         }
 
-
+      
 
         public override void Update(BaseDTO baseDTO)
         {
@@ -116,5 +115,25 @@ namespace DataAccess.CRUD
             };
             return movie;
         }
+
+        public Movie RetrieveByTitle(Movie movie)
+        {
+            var sqlOperation = new SqlOperation
+            {
+                ProcedureName = "RET_MOVIE_BY_TITLE_PR"
+            };
+            sqlOperation.AddStringParameter("P_Title", movie.Title);
+
+            var result = _sqlDao.ExecuteQueryProcedure(sqlOperation);
+
+            if (result.Count > 0)
+            {
+                var obj = BuildMovie(result[0]);
+                return (Movie)obj;
+            }
+
+            return null;
+        }
+
     }
 }
