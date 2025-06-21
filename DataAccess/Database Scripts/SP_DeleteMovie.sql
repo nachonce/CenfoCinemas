@@ -1,0 +1,9 @@
+﻿CREATE PROCEDURE DEL_MOVIE_PR
+
+@P_Title nvarchar(35)
+
+AS 
+BEGIN
+	DELETE FROM TBL_Movie
+	WHERE Title = @P_Title
+END

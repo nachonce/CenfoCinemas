@@ -144,7 +144,19 @@ namespace DataAccess.CRUD
 
         public override void Update(BaseDTO baseDTO)
         {
-            throw new NotImplementedException();
+            var user = (User)baseDTO;
+            var sqlOperation = new SqlOperation();
+            sqlOperation.ProcedureName = "UPD_USER_PR";
+
+            sqlOperation.AddStringParameter("@P_Name", user.Name);
+            sqlOperation.AddStringParameter("@P_UserCode", user.UserCode);
+            sqlOperation.AddStringParameter("@P_Email", user.Email);
+            sqlOperation.AddStringParameter("@P_Status", user.Status);
+
+
+            _sqlDao.ExecuteProcedure(sqlOperation);
+
+
         }
 
 

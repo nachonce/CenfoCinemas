@@ -51,6 +51,39 @@ namespace CoreApp
                 ManagerException(ex); // Método heredado de BaseManager para manejo uniforme
             }
         }
+
+        public void Delete(string title)
+        {
+            var uCrud = new MovieCrudFactory();
+            var movie = new Movie();
+            movie.Title = title;
+            uCrud.Delete(movie);
+        }
+
+
+
+        public List<Movie> RetrieveAll()
+        {
+
+
+            var uCrud = new MovieCrudFactory();
+            return uCrud.RetrieveAll<Movie>();
+        }
+
+       
+        public Movie RetrieveById(int id)
+        {
+            var movieCrud = new MovieCrudFactory();
+            var movie = movieCrud.RetrieveById<Movie>(id);
+            return movie;
+        }
+
+        public void Update(Movie  movie)
+        {
+            var uCrud = new MovieCrudFactory();
+            uCrud.Update(movie);
+        }
+
     }
 }
 

@@ -64,17 +64,18 @@ namespace WebAPI.Controllers
         {
             try
             {
-                return Ok(user);
+                var um = new UserManager();
+                um.Update(user);    
+                return Ok(user + "Uusario Actualziado");
             }
             catch (Exception ex)
             {
 
                 return StatusCode(500, ex.Message);
             }
-
-
-
         }
+
+
         [HttpDelete]
         [Route("Delete/{userCode}")]
 
@@ -83,13 +84,11 @@ namespace WebAPI.Controllers
             try
             {
 
-                var um = new UserCrudFactory();
-                var userToDelete = new User();
-          
-                userToDelete.UserCode = userCode;
+                var um = new UserManager();
+                
 
 
-                um.Delete(userToDelete);
+                um.Delete(userCode);
 
                 return Ok("Usuario eliminado correctamente");
             }
@@ -107,7 +106,7 @@ namespace WebAPI.Controllers
         {
             try
             {
-                var um = new UserCrudFactory();
+                var um = new UserManager();
                 var uCrud = um.RetrieveByEmail<User>(email);
                 return Ok(uCrud);
             }

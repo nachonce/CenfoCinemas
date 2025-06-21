@@ -67,6 +67,31 @@ namespace CoreApp
             var uCrud = new UserCrudFactory();
             return uCrud.RetrieveAll<User>();
         }
+
+        public void Delete(string  userCode ) {
+            var uCrud = new UserCrudFactory();
+            var user = new User();
+            user.UserCode = userCode;
+            uCrud.Delete(user);
+        }
+
+        public T RetrieveByEmail<T>(string email) { 
+
+            var uCrud = new UserCrudFactory();
+         
+
+            return uCrud.RetrieveByEmail<T>(email);
+        
+        }
+
+        public void Update(User user) { 
+            var uCrud = new UserCrudFactory();
+            uCrud.Update(user); 
+        }
+
+
+
+
         private Boolean IsOver18(User user)
         {
             var currentDate = DateTime.Now;
