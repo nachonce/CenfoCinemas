@@ -23,9 +23,6 @@ namespace DataAccess.CRUD
             var op = new SqlOperation();
             op.ProcedureName = "CRE_MOVIE_PR";
 
-            
-          
-
             op.ProcedureName = "CRE_MOVIE_PR";
             op.AddStringParameter("P_Title",movie.Title );
             op.AddStringParameter("P_Description", movie.Description);
@@ -106,12 +103,7 @@ namespace DataAccess.CRUD
                 ReleaseDate = (DateTime)row["ReleaseDate"],
                 Genre = (string)row["Genre"],
                 Director = (string)row["Director"],
-           
-
-
-
-
-
+       
             };
             return movie;
         }

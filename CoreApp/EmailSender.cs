@@ -8,7 +8,7 @@ public class EmailSender
 {
     public static async Task SendWelcomeEmail(string toEmail, string userName)
     {
-      var apiKey = Environment.GetEnvironmentVariable("SENDGRID_API_KEY");
+      var apiKey = "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";
 
 
 
@@ -39,7 +39,7 @@ public class EmailSender
 
     public static async Task SendNewMovieEmail(string Email, string movieTitle) {
 
-        var apiKey = Environment.GetEnvironmentVariable("SENDGRID_API_KEY");
+        var apiKey = "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";
 
 
 

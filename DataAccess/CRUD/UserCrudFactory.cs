@@ -34,14 +34,23 @@ namespace DataAccess.CRUD
 
         public override void Delete(BaseDTO baseDTO)
         {
-            throw new NotImplementedException();
+            var user = (User)baseDTO;
+            var sqlOperation = new SqlOperation();
+            sqlOperation.ProcedureName = "DEL_USER_PR";
+            sqlOperation.AddStringParameter("@P_UserCode", user.UserCode); 
+
+            _sqlDao.ExecuteProcedure(sqlOperation); 
+
         }
+
+
+
 
         public override T RetrieveById<T>(int id)
         {
             var op = new SqlOperation();
             op.ProcedureName = "RET_USER_BY_ID_PR";
-            op.AddIntParam("P_Ide", id);
+            op.AddIntParam("P_Id", id);
 
             var result = _sqlDao.ExecuteQueryProcedure(op);
 
@@ -55,18 +64,23 @@ namespace DataAccess.CRUD
             return default(T); // o throw new Exception("Usuario no encontrado");
         }
 
-        public T RetrieveByUerCode<T>(User user)
+
+
+
+
+
+        public T RetrieveByUerCode<T>(string userCode)
         {
                 var sqlOperation = new SqlOperation();
             sqlOperation.ProcedureName = "RET_USER_BY_CODE_PR";
-            sqlOperation.AddStringParameter("P_UserCode", user.UserCode);
+            sqlOperation.AddStringParameter("P_UserCode", userCode);
 
             var lstResults = _sqlDao.ExecuteQueryProcedure(sqlOperation);
 
 
             if (lstResults.Count > 0) {
                 var row = lstResults[0];
-                user = BuildUser(row);
+                var user = BuildUser(row);
 
                 return (T)Convert.ChangeType(user, typeof(T));
 
@@ -76,11 +90,16 @@ namespace DataAccess.CRUD
             return default(T);
         }
 
-        public T RetrieveByEmail<T>(User user)
+
+
+
+
+
+        public T RetrieveByEmail<T>(string  email)
         {
             var sqlOperation = new SqlOperation();
             sqlOperation.ProcedureName = "RET_USER_BY_EMAIL_PR";
-            sqlOperation.AddStringParameter("P_Email", user.Email);
+            sqlOperation.AddStringParameter("P_Email", email);
 
             var lstResults = _sqlDao.ExecuteQueryProcedure(sqlOperation);
 
@@ -88,7 +107,7 @@ namespace DataAccess.CRUD
             if (lstResults.Count > 0)
             {
                 var row = lstResults[0];
-                user = BuildUser(row);
+               var user = BuildUser(row);
 
                 return (T)Convert.ChangeType(user, typeof(T));
 
@@ -97,6 +116,12 @@ namespace DataAccess.CRUD
             }
             return default(T);
         }
+
+
+
+
+
+
 
         public override List<T> RetrieveAll<T>()
         {
@@ -121,6 +146,9 @@ namespace DataAccess.CRUD
         {
             throw new NotImplementedException();
         }
+
+
+
 
         // metodo que convirte el diccionario en un usuario
 

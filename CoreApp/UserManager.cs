@@ -31,14 +31,14 @@ namespace CoreApp
 
                     // Verificar si ya existe un usuario con ese código
                     Console.WriteLine("DEBUG USER CODE: " + user.UserCode);
-                    var uExist = uCrud.RetrieveByUerCode<User>(user);
+                    var uExist = uCrud.RetrieveByUerCode<User>(user.UserCode);
                     if (uExist != null)
                     {
                         throw new Exception("El código no está disponible");
                     }
 
                     // Verificar si ya existe un usuario con ese correo
-                    var emailExist = uCrud.RetrieveByEmail<User>(user);
+                    var emailExist = uCrud.RetrieveByEmail<User>(user.Email);
                     if (emailExist != null)
                     {
                         throw new Exception("El correo ya está registrado");
@@ -61,7 +61,12 @@ namespace CoreApp
             }
         }
 
+        public List<User> RetrieveAll() {
 
+
+            var uCrud = new UserCrudFactory();
+            return uCrud.RetrieveAll<User>();
+        }
         private Boolean IsOver18(User user)
         {
             var currentDate = DateTime.Now;
@@ -79,6 +84,9 @@ namespace CoreApp
 
 
         }
+
+
+        
     }
 }
 

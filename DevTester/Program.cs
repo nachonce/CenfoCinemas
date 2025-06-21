@@ -166,6 +166,9 @@ public class program {
             Console.WriteLine(" Usuario agregado con éxito.");
         }
 
+
+
+
         static void ActualizarUsuario(SqlDao sqlDao)
         {
             Console.Write("Código nuevo del usuario: ");
