@@ -17,13 +17,14 @@ namespace DataAccess.CRUD
         {
             _sqlDao = SqlDao.GetInstance();
         }
+
         public override void Create(BaseDTO baseDTO)
         {
             var movie = baseDTO as Movie;
             var op = new SqlOperation();
             op.ProcedureName = "CRE_MOVIE_PR";
 
-            op.ProcedureName = "CRE_MOVIE_PR";
+           
             op.AddStringParameter("P_Title",movie.Title );
             op.AddStringParameter("P_Description", movie.Description);
             op.AddDateTimeParam("P_ReleaseDate", movie.ReleaseDate);
