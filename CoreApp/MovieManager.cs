@@ -36,7 +36,7 @@ namespace CoreApp
 
                     foreach (var email in allEmails)
                     {
-                        await EmailSender.SendNewMovieEmail(email, movie.Title);
+                        //await EmailSender.SendNewMovieEmail(email, movie.Title);
                     }
                 }
                 catch (Exception innerEx)
@@ -52,11 +52,10 @@ namespace CoreApp
             }
         }
 
-        public void Delete(string title)
+        public void Delete(Movie movie)
         {
             var uCrud = new MovieCrudFactory();
-            var movie = new Movie();
-            movie.Title = title;
+           
             uCrud.Delete(movie);
         }
 

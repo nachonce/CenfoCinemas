@@ -13,20 +13,21 @@ namespace WebAPI.Controllers
     [ApiController]
     public class UserController : ControllerBase
     {
+       
+
 
         [HttpPost]
         [Route("Create")]
-        public ActionResult Create(User user)
+        public  ActionResult Create(User user)
         {
+             
 
 
             try
             {
                 var userManage = new UserManager();
-                userManage.Create(user);
+                 userManage.Create(user);
                 return Ok(user);
-
-
             }
             catch (Exception ex)
 
@@ -77,9 +78,9 @@ namespace WebAPI.Controllers
 
 
         [HttpDelete]
-        [Route("Delete/{userCode}")]
+        [Route("Delete/")]
 
-        public ActionResult Delete(string userCode)
+        public ActionResult Delete(User  user)
         {
             try
             {
@@ -88,7 +89,7 @@ namespace WebAPI.Controllers
                 
 
 
-                um.Delete(userCode);
+                um.Delete(user);
 
                 return Ok("Usuario eliminado correctamente");
             }

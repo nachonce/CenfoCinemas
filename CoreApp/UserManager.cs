@@ -46,9 +46,19 @@ namespace CoreApp
 
                     // Si pasa todas las validaciones, crear el usuario
                     uCrud.Create(user);
-                    EmailSender.SendWelcomeEmail(user.Email, user.Name).Wait(); // .Wait() si estás en un método no async
+                    // .Wait() si estás en un método no async
+                    /*
+                    try
+                    {
+                        EmailSender.SendWelcomeEmail(user.Email, user.Name).Wait();
+                    }
+                    catch (Exception mailEx)
+                    {
+                        
+                        Console.WriteLine($"Error enviando correo de bienvenida: {mailEx.Message}");
 
-
+                    }
+                    */
                 }
                 else
                 {
@@ -68,10 +78,9 @@ namespace CoreApp
             return uCrud.RetrieveAll<User>();
         }
 
-        public void Delete(string  userCode ) {
+        public void Delete(User  user ) {
             var uCrud = new UserCrudFactory();
-            var user = new User();
-            user.UserCode = userCode;
+           
             uCrud.Delete(user);
         }
 

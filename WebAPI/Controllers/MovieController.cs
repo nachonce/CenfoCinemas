@@ -33,9 +33,9 @@ namespace WebAPI.Controllers
     
 
      [HttpDelete]
-        [Route("Delete/{title}")]
+        [Route("Delete")]
 
-        public ActionResult Delete(string title)
+        public ActionResult Delete(Movie movie)
         {
             try
             {
@@ -44,7 +44,7 @@ namespace WebAPI.Controllers
 
 
 
-                um.Delete(title);
+                um.Delete(movie);
 
                 return Ok("Pelicula eliminada correctamente");
             }

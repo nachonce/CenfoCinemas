@@ -8,7 +8,7 @@ public class EmailSender
 {
     public static async Task SendWelcomeEmail(string toEmail, string userName)
     {
-      var apiKey = "";
+        var apiKey = "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";
 
 
 
@@ -30,14 +30,15 @@ public class EmailSender
         Console.WriteLine("Status: " + response.StatusCode);
 
 
-      
+
         string body = await response.Body.ReadAsStringAsync();
         Console.WriteLine("Status: " + response.StatusCode);
         Console.WriteLine("Response body: " + body); //
 
     }
 
-    public static async Task SendNewMovieEmail(string Email, string movieTitle) {
+    public static async Task SendNewMovieEmail(string Email, string movieTitle)
+    {
 
         var apiKey = "";
 
@@ -59,7 +60,7 @@ public class EmailSender
 
 
 
-        
+
 
 
     }
