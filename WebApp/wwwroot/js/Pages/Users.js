@@ -28,6 +28,12 @@ function UsersViewController() {
 
         })
 
+        $("#btnSearch").click(function () {
+            var vc = new UsersViewController();
+            vc.LoadProfile();
+        });
+
+
 
     }
 
@@ -190,7 +196,45 @@ function UsersViewController() {
 
         })
     }
+
+
+    this.LoadProfile = function () {
+
+        // 1. Obtener el valor del campo de texto con el ID
+        const id = $("#txtId").val();
+        if (!id) {
+            alert("Por favor ingresa un Id para buscar.");
+            return;
+        }
+
+        const urlService = this.ApiEndPointName + "/RetrieveById/" + id;
+        const ca = new ControlActions();
+
+        ca.GetToApi(urlService, function (userDTO) {//Llamada HTTP GET a la API	Llamar por teléfono a la oficina ,
+            //URL del endpoint	Número de la oficina que quiero llamar
+            //function(userDTO)	Qué hacer cuando contesten	Escuchar lo que dicen y escribirlo
+            // 6. Llenar el formulario con los datos del usuario
+            console.log("Usuario recibido:", userDTO);
+            console.table(userDTO);
+
+
+
+            $("#txtUserCode").val(userDTO.userCode);
+            $("#txtName").val(userDTO.name);
+            $("#txtEmail").val(userDTO.email);
+            $("#txtStatus").val(userDTO.status);
+         
+            $("#txtPassword").val(userDTO.password);
+
+            var onlyDate = userDTO.birthDate.split('T');
+            $('#txtBirthDate').val(onlyDate[0]);
+
+
+
+        });
+    };
 }
+
 
 
 

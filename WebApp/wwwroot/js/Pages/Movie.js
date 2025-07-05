@@ -28,6 +28,15 @@
             vc.Delete();
         })
 
+        $('#btnSearch').click(function () {
+
+            var vc = new MovieViewController();
+            vc.LoadProfile();
+
+
+        })
+    
+
     }
 
 
@@ -192,6 +201,42 @@
 
         })
     }
+
+    this.LoadProfile = function () {
+
+        // 1. Obtener el valor del campo de texto con el ID
+        const id = $("#txtId").val();
+        if (!id) {
+            alert("Por favor ingresa un Id para buscar.");
+            return;
+        }
+
+        const urlService = this.ApiEndPointName + "/RetrieveById/" + id;
+        const ca = new ControlActions();
+
+        ca.GetToApi(urlService, function (movieDTO) {//Llamada HTTP GET a la API	Llamar por teléfono a la oficina ,
+            //URL del endpoint	Número de la oficina que quiero llamar
+            //function(userDTO)	Qué hacer cuando contesten	Escuchar lo que dicen y escribirlo
+            // 6. Llenar el formulario con los datos del usuario
+            console.log("Usuario recibido:", movieDTO);
+            console.table(movieDTO);
+            $('#txtId').val(movieDTO.id);
+            $('#txtTitle').val(movieDTO.title);
+            $('#txtDescription').val(movieDTO.description);
+            $('#txtGenre').val(movieDTO.genre);
+            $('#txtDirector').val(movieDTO.director);
+
+            // Normalmente la fecha viene con hora (ej: '2025-07-20T00:00:00')
+            // Vamos a quitar la parte de la hora para mostrar solo la fecha
+            var onlyDate = movieDTO.releaseDate.split("T");
+            // Colocamos solo la fecha en el campo 'txtBirthDate'
+
+            $('#txtReleaseDate').val(onlyDate[0])
+
+
+
+        });
+    };
 }
 
 $(document).ready(function () {
